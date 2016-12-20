@@ -1,0 +1,267 @@
+Yii 1
+
+PMS(Sample App for Project Management)
+
+Add Behaviours/Events
+UserBehavior beforeSave,afterSave,afterLogin http://www.yiiframework.com/wiki/481/how-to-implement-an-event-and-attach-it-in-a-behavior/
+
+
+2016-10-27
+Authentication and Authorization
+Use password hash
+How to apply Access Control Filter
+How to create new filter
+How to create sample widget
+
+
+2016-10-28
+Yii 1 Lessons from LMS
+How to pass data from controller to view
+How to integrate jQuery DateTimePicker
+How to validate field as date
+How to validate date greater than other date field.
+Customizing Widgets Globally 
+
+
+2016-10-31
+How to create FormModel(updatePassword)
+How to work with flash messages
+Working with scenarios
+How to use captcha on login form
+
+2016-11-01
+How to download file
+How to enable client side validation on forms
+Localization
+How to configure localization(sourceLang,lang)
+Set app lang in controller or anywhere inside application
+Setup/Create Translation Files
+
+2016-11-02
+How to add js/css
+How to add core scripts
+How to add custom scripts
+How to create extension to create widget for latest Select2
+
+2016-11-03
+Integrate bootstrap theme
+How to use mutliple themes
+How to set theme on the fly
+
+2016-11-04
+Install/Configure Java for connector app
+Install/Configure Postgres
+Overview/understand java connector app
+Create Build
+Install/Setup mercural
+
+2016-11-08
+Setup weatech app
+Install/Setup localconfig
+Install required php extentions (pgsql,pdo_pgsql,php curl etc)
+Get generic overview of app from Tanveer
+
+2016-11-09
+Explore DB
+api_usage_notifications
+billing-info for Add invoices section under admin panel
+comments contains data about comments related to incidents
+devices contains data about devices extracted from untangle data
+contacts
+dismiss_comments
+groups
+
+What is biu?
+Concept behind CREATE TABLE (...) WITH ( OIDS = FALSE );
+
+2016-11-10
+Get business domain/nature from Yasir
+Understand Used Flags/Usage Records
+Overview of datasources for weatech(untangle,everAccountable)
+Overview of VIEW public.v_flags_stack
+Introduction of IgniteUi from Saba
+Setup cron job
+/10    * wget http://webwatcher.dev/php/wmrcDashboard/cronReleaseBlockedFlags.php --delete-after
+
+2016-11-11
+Explore/General overiew of App Code
+Explore/General overiew of DB structure
+Demo task
+
+
+2016-11-16
+http://projects.techsupportonellc.com/issues/1400#note-7
+Login to redmine and understand requirement/issue
+Debug/Understand code already implemented for autoload records on page load
+Make changes and verify that on page load records are not being populated and should produce only by click on search button
+Commit changes
+
+http://projects.techsupportonellc.com/issues/1200#note-9
+Login to redmine and understand requirement/issue
+Debug Issue:
+Login to application(locally) and verify date difference by visiting edit incident page
+Debugged code and verified that timezone conversion is being done on both dates
+Requested db data from stagging server for incident mentioned in screenshot.
+After viewing db data and data displayed in browser
+Edit Incident Block
+In db:      2016-10-01 18:55:16.577943
+In display: 2016-10-02 3:44:50 am
+Events List Block
+in db:      2016-10-01 18:44:50
+in display: 2016-10-02 12:44:50 PM	
+
+Notes: needs further debugging on table/view from which we are getting data for editIncident, may be we are getting incorrect data.
+
+
+
+
+$date = $this->change_date_timezone_for_display($date);
+return  "/Date(" . strtotime($date) . "000)/";
+
+here in these lines:
+in first line we are converting utc (received from db) to user timezone(for example gmt+5)
+but in second line we are saying that it is in utc because are providing "000" at the end of string.(here it creates issue)
+When ignite gird get this string "/Date(1448979763000)/" and then converts to local timezone.
+So if we are going to use date fields of ignite ui then we should not convert it to user timezone. we need to provide this in utc,
+and ignite grid/javascript do conversion.
+
+
+2016-11-18
+
+Tested for Required Field
+Add Contact Form
+Edit Contact Form 
+Tested for valid url format
+Check Site Screen
+Issues found
+Url format is not being validated.
+
+2016-11-22
+http://webwatcher.dev/php/events/searchEvents.php
+Usage Records Search page.
+Score from should be greater than Score To.
+Start Date should be less than end date
+http://webwatcher.dev/php/devices/searchDevices.php
+Search Devices Page
+Inprogress Notification bar/icon/loader not shown while processing search request.
+http://webwatcher.dev/php/rules/searchRules.php
+Search Rules
+Points From should be less than Points To Field.
+Tested for Page Titles
+Main
+WMRC Dashboard
+Unreviewed Flags
+Search User
+Add/Edit User
+Search Incidents
+Add/Edit Incident
+Search Contacts
+Add/Edit Contacts
+Search Usage Records
+Search User Groups
+Add/Edit User Groups
+Search Rule
+Add/Edit Rule
+
+
+
+Issues found /Fixed
+Spell Mistake In title (Search User Page)
+Spell Mistake In title (Search Incident Page)
+Spell Mistake In title (Search Contacts Page)
+Spell Mistake In title (Search Usage Records Page)
+Incorrect Page Title for Add/Edit Rule(WebWatcher |) It should be Like "WebWatcher | Add System Rule"
+
+2016-11-23
+Issues Found But not Fixed
+Incorrect Page Title for Unreviewed Flags(Weatec | Reviewer Dashboard) It should be Like "Unreviewed Flags"
+Incorrect Page Title for Get usage notifications
+Incorrect Page Title for Search Comments
+Tested for page Titles
+Admin Panel
+ Ref levels
+ Settings
+ System Users
+ Contact Types
+ Current Logins
+ Header Quick Links
+ Ref Category Levels
+ Quick Score Adjustment
+ Score Adjustment Reasons
+ Add Invoices
+ Usage Notifications
+ Congregation Defaults
+ False Flags
+ EA Request Log
+ Search Comments
+
+
+2016-11-28
+Understand requirment Task# 1462
+Create/Setup Java App for Task# 1462
+Add/Configure DB Setup in Java App using credentials from Config file.
+Configure Fields Inprogress....
+Questions:
+From Above description it is assumed that we will be having data in reports.http_events table
+and one row in table will be having following fields(may contain someother fields too)
+"date", "url", "pagetitle", "device", "classifierjson"
+"account","syncstatus" will be populated from config file and will be sent to web url.??
+What is SA evaluator and what is being returned from this when provided url to this?
+So that i can get an idea about datatype of classifierjson
+
+2016-12-02
+
+Create Function to mark sa events as processed after migrating to events table
+Improve code to set/unset db connections
+Enclose web request initialization in try catch block to catch general exceptions and log it in file for reference
+Create Script to execute via command line or scheduled cron job.
+
+Plan for tomorow
+Implement Locking to not execute file through cron if cron is already in execution
+
+
+2016-12-16
+Validate markup for all web pages (validate HTML and CSS for syntax errors) to make sure it is compliant with the standard
+https://validator.w3.org
+Login Page,Main Page(index.php)
+Issues Found
+A meta element with an http-equiv attribute whose value is X-UA-Compatible must have a content attribute with the value IE=edge
+Unclosed Tags
+div tag within ul tag
+A charset attribute on a meta element found after the first 1024 bytes.
+
+2016-12-19
+Validate Pages for markup(HTML Validation)
+WMRC Dashboard /php/dashboard/dashboard.php
+Unreviewed Flags /php/wmrcDashboard/wmrcDashboard.php
+Users php/searchUsers.php
+Edit user info /php/editUser.php?user_id=116
+
+Errors Fixed:
+Error: Bad value for attribute src on element iframe: Must be non-empty.
+Error: Unclosed element div.
+Duplicate id id=""
+Duplicate ID id="editUser".
+Unclosed span tags
+Duplicate id id="dvBtnsSelectContacts"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
